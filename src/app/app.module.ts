@@ -7,6 +7,7 @@ import { MainComponent } from './components/main/main.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 import { TweetsContainerComponent } from './components/tweets-container/tweets-container.component';
 import {NgxLinkifyjsModule} from 'ngx-linkifyjs';
+import { PostTweetBoxComponent } from './components/post-tweet-box/post-tweet-box.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {NgxLinkifyjsModule} from 'ngx-linkifyjs';
     MainComponent,
     TweetComponent,
     TweetsContainerComponent,
+    PostTweetBoxComponent,
   ],
   imports: [
     BrowserModule,
