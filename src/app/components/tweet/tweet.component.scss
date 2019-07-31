@@ -1,0 +1,77 @@
+@import "../../../styles";
+
+:host ::ng-deep .tweet {
+
+  text-align: left;
+  position: relative;
+  margin: 2em 0;
+  padding: 0.7em 1em 0.7em 1em;
+  border-radius: 10px;
+  box-shadow: 0 0 0 0.5em rgba($black, 0.2);
+  background: white;
+
+  &:hover .interactions { opacity: 1.0; }
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 7px;
+    background: url('https://si0.twimg.com/profile_images/378800000573658560/c76bf55b41d40d843a1da4962aba3466_normal.jpeg') no-repeat;
+    background-size: cover;
+  }
+
+  time {
+    position: absolute;
+    right: 1em;
+
+    a {
+      font-size: 0.8667em;
+      color: lighten($black, 40%);
+
+      &:hover { color: $highlight; }
+    }
+  }
+
+  p { margin: 0; }
+
+  a {
+    color: $highlight;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  a.user {
+    font-weight: bold;
+    color: $black;
+    text-decoration: none;
+
+    &:hover {
+      color: $highlight;
+    }
+
+    small {
+      font-weight: normal;
+      color: lighten($black, 40%);
+    }
+  }
+
+  .interactions {
+    margin-top: 0.5em;
+    font-size: 0.8667em;
+    text-align: right;
+    opacity: 0.3;
+
+    a {
+      padding-left: 1em;
+
+      &:hover { color: $black; text-decoration: none; }
+
+      i { padding-right: 0.3334em; }
+    }
+  }
+}
