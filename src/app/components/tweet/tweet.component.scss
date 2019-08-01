@@ -1,7 +1,10 @@
 @import "../../../styles";
 
-:host ::ng-deep .tweet {
+.tweet{
+  animation: fade_in .5s;
+}
 
+:host ::ng-deep .tweet {
   text-align: left;
   position: relative;
   margin: 2em 0;
@@ -10,17 +13,18 @@
   box-shadow: 0 0 0 0.5em rgba($black, 0.2);
   background: white;
 
-  &:hover .interactions { opacity: 1.0; }
+  &:hover .interactions {
+    opacity: 1.0;
+  }
 
   &:before {
-    content: ' ';
     position: absolute;
     top: 1em;
     left: 1em;
     width: 3.2em;
     height: 3.2em;
     border-radius: 7px;
-    background: url('https://si0.twimg.com/profile_images/378800000573658560/c76bf55b41d40d843a1da4962aba3466_normal.jpeg') no-repeat;
+    //background: url('https://si0.twimg.com/profile_images/378800000573658560/c76bf55b41d40d843a1da4962aba3466_normal.jpeg') no-repeat;
     background-size: cover;
   }
 
@@ -32,17 +36,27 @@
       font-size: 0.8667em;
       color: lighten($black, 40%);
 
-      &:hover { color: $highlight; }
+      &:hover {
+        color: $highlight;
+      }
     }
   }
 
-  p { margin: 0; }
+  p {
+    margin: 0;
+    word-wrap: break-word;
+    width: 100%;
+    & a {
+      color: $highlight;
+    }
+  }
 
   a {
-    color: $highlight;
     text-decoration: none;
 
-    &:hover { text-decoration: underline; }
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   a.user {
@@ -54,7 +68,7 @@
       color: $highlight;
     }
 
-    small {
+    small a {
       font-weight: normal;
       color: lighten($black, 40%);
     }
@@ -68,10 +82,16 @@
 
     a {
       padding-left: 1em;
+      color: $highlight;
 
-      &:hover { color: $black; text-decoration: none; }
+      &:hover {
+        color: $black;
+        text-decoration: none;
+      }
 
-      i { padding-right: 0.3334em; }
+      i {
+        padding-right: 0.3334em;
+      }
     }
   }
 }

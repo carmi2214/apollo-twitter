@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
+import { AllTweetsGQL, PostTweetGQL, Tweet } from './graphql/tweets.gql';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Context } from '../entities/context';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TweetsService {
 
-  constructor() { }
+  constructor(private allTweetsGQL: AllTweetsGQL, private postTweetGQL: PostTweetGQL) {
+  }
 
-  getTweets(): Tweet[] {
-    const dateOfTweet: Date = new Date();
-    const dateOfTweetNow: Date = new Date();
-    dateOfTweet.setHours(1);
-    dateOfTweetNow.setMinutes(3);
-    const user: User = {firstName: 'Arik', lastName: 'Furman', id: '1', avatarUrl: '', username: 'arikf', password: 'ricardo'};
-    return [{body: 'Test Test #white power man', author: user, date: dateOfTweet} as Tweet,
-            {body: 'Test Test', author: user, date: dateOfTweetNow} as Tweet,
-            {body: 'Test Test', author: user} as Tweet,
-            {body: 'Test Test', author: user} as Tweet,
-            {body: 'Test Test', author: user} as Tweet];
+  getTweets(): Observable<Tweet[]> {
+    return this.allTweetsGQL.watch().valueChanges.pipe(map(result => result.data.allTweets));
+  }
+
+  postTweet(tweetBody: string, username: string): Observable<Tweet> {
+    const context: Context = new Context();
+    context.setHeader('username', username);
+    return this.postTweetGQL.mutate(
+      {tweetBody}
+      , {
+        context: {headers: new HttpHeaders().set('username', username)}
+      });
   }
 }

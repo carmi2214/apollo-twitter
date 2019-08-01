@@ -3,7 +3,10 @@ button {
   color: white;
   border: 1px solid #3079ed;
   border-radius: 5px;
+  margin: 1em;
   padding: 1em;
+  max-height: 4em;
+  min-height: 4em;
 }
 
 button[type="submit"]:hover {
@@ -11,19 +14,38 @@ button[type="submit"]:hover {
   color: white;
 }
 
+select{
+  width: 20%;
+  margin: 1em;
+  padding: 1em;
+  max-height: 4em;
+  min-height: 4em;
+
+}
+
 textarea {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  width: 100%;
-  margin: 8px 0;
+  width: 60%;
+  margin: 1em 0;
   text-indent: 1em;
   padding: 10px 0;
-  border-radius: 3px;
   border: 1px solid lightgray;
   border-radius: 5px;
 }
 
 .container{
+  display: flex;
+  align-content: center;
   width: 50%;
+  margin: auto;
+}
+
+span{
+  color: white;
+  background: #4d9aff;
+  padding: .3em;
+  border-radius: 10px;
+  max-height: 4em;
   margin: auto;
 }

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {UsersService} from '../../services/users.service';
+import {User} from '../../services/graphql/users.gql';
+import {TweetsService} from '../../services/tweets.service';
+import {Tweet} from '../../services/graphql/tweets.gql';
 
 @Component({
   selector: 'app-post-tweet-box',
@@ -7,9 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostTweetBoxComponent implements OnInit {
 
-  constructor() { }
+  postTweetForm: FormGroup = this.fb.group({
+    tweetText: [''],
+    usersControl: ['']
+  });
+  users: User[] = [];
+
+  @Output()
+  sentTweetUpdate: EventEmitter<Tweet> = new EventEmitter<Tweet>();
+
+  constructor(private usersService: UsersService, private tweetsService: TweetsService, private fb: FormBuilder) {
+  }
 
   ngOnInit() {
+    this.usersService.getUsers().subscribe(result => this.users = result);
+  }
+
+  postTweet() {
+    const tweetText: string = this.postTweetForm.controls.tweetText.value;
+    const username = this.postTweetForm.controls.usersControl.value;
+    if (username === '' || tweetText === undefined || tweetText === '') {
+      alert('Choose user or enter tweet text');
+      return;
+    }
+
+    this.tweetsService.postTweet(tweetText, username).subscribe(result => {
+      this.postTweetForm.controls.tweetText.setValue('');
+      this.sentTweetUpdate.emit((result as any).data.createTweet as Tweet);
+      }
+    )
+    ;
   }
 
 }

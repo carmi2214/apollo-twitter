@@ -1,7 +1,9 @@
 <div class="tweet">
-  <time><a href="#">{{timeSince(tweet.date)}}</a></time>
-  <a href="#" class="user">{{getFullName()}} <small>@{{this.tweet.author.username}}</small></a>
-  <p [innerHTML]="this.tweet.body | linkify">
+  <time><a href="#" [title]="tweet.date">{{timeSince(tweet.date)}}</a></time>
+  <a href="user/{{this.tweet.user.username}}" class="user">{{getFullName()}}
+    <small><a href="user/{{this.tweet.user.username}}">@{{this.tweet.user.username}}</a></small>
+  </a>
+  <p [innerHTML]="this.tweet.body | linkify : {formatHref:this.formatHref}">
   </p>
   <div class="interactions">
     <a href="#" class="reply"><i class="icon-reply"></i>Reply</a>

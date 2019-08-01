@@ -8,6 +8,10 @@ import { TweetComponent } from './components/tweet/tweet.component';
 import { TweetsContainerComponent } from './components/tweets-container/tweets-container.component';
 import {NgxLinkifyjsModule} from 'ngx-linkifyjs';
 import { PostTweetBoxComponent } from './components/post-tweet-box/post-tweet-box.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
+import { RouterfyPipe } from './components/tweets-container/routerfy.pipe';
 
 @NgModule({
   declarations: [
@@ -16,11 +20,15 @@ import { PostTweetBoxComponent } from './components/post-tweet-box/post-tweet-bo
     TweetComponent,
     TweetsContainerComponent,
     PostTweetBoxComponent,
+    RouterfyPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxLinkifyjsModule.forRoot()
+    NgxLinkifyjsModule.forRoot(),
+    GraphQLModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,17 @@
-.site-container{
-  padding-top:15%;
+.site-container {
+  padding-top: 200px;
 }
 
-img{
+img {
   position: fixed;
   transform: translate(-50%, 0%);
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 100
+  }
 }
