@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TweetsService} from '../../services/tweets.service';
 import {Tweet} from '../../services/graphql/tweets.gql';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-tweets-container',
@@ -10,31 +11,39 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class TweetsContainerComponent implements OnInit {
 
-  constructor(private tweetsService: TweetsService, private routeParams: ActivatedRoute) {
+  constructor(private tweetsService: TweetsService, private routeParams: ActivatedRoute, private router: Router) {
   }
 
   tweets: Tweet[] = [];
 
   ngOnInit() {
-    this.routeParams.params.subscribe(params => this.loadData(params));
+    this.routeParams.params.subscribe(params => this.loadTweetsByParam(params));
   }
 
-  loadData(params: any) {
+  loadTweetsByParam(params: any) {
     if (params.hash) {
-      alert(params.hash);
+      this.loadTweets(this.tweetsService.getTweetsByTagName(params.hash));
     } else if (params.username) {
-      alert(params.username);
+      this.loadTweets(this.tweetsService.getTweetsByUsername(params.username));
     } else {
       this.updateTweets();
     }
   }
 
   updateTweets(event?) {
-    if (event === undefined) {
-      this.tweetsService.getTweets().subscribe(result => this.tweets = result);
+    if (event === undefined || this.router.url !== '') {
+      if (this.router.url !== '') {
+        this.router.navigateByUrl('');
+      }
+      this.loadTweets(this.tweetsService.getTweets());
+
     } else {
       this.tweets.push(event);
     }
+  }
+
+  loadTweets(tweetsPromise: Observable<Tweet[]>) {
+    tweetsPromise.subscribe(result => this.tweets = result);
   }
 
 }

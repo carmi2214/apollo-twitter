@@ -11,7 +11,7 @@ import { PostTweetBoxComponent } from './components/post-tweet-box/post-tweet-bo
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import { RouterfyPipe } from './components/tweets-container/routerfy.pipe';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { RouterfyPipe } from './components/tweets-container/routerfy.pipe';
     TweetComponent,
     TweetsContainerComponent,
     PostTweetBoxComponent,
-    RouterfyPipe,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Query} from 'apollo-angular';
 import gql from 'graphql-tag';
+import {Tweet} from './tweets.gql';
 
 export interface User {
   id: string;
@@ -9,16 +10,18 @@ export interface User {
   firstName: string;
   lastName: string;
   avatarUrl?: string;
+  tweets: Tweet[];
 }
 
-export interface AllUsersResponse {
+export interface UsersResponses {
   allUsers: User[];
+  userByUsername: User;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersGql extends Query<AllUsersResponse> {
+export class UsersGql extends Query<UsersResponses> {
   document = gql`{
     allUsers{
       id
@@ -29,3 +32,24 @@ export class UsersGql extends Query<AllUsersResponse> {
     }
   }`;
 }
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserByUsernameGQL extends Query<UsersResponses> {
+  document = gql`
+    query($username: String!){
+    userByUsername(username:$username){
+      tweets{
+        body
+        date
+        user{
+          username
+          firstName
+          lastName
+        }
+      }
+    }
+  }`;
+}
+
