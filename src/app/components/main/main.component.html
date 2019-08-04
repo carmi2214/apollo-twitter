@@ -1,4 +1,4 @@
-<img width="300" alt="Angular Logo" src="../assets/apollo-twitter2.png">
+<img width="300" alt="Angular Logo" src="../assets/apollo-twitter2.png" (click)="backToHome()">
 <div class="site-container">
   <app-post-tweet-box (sentTweetUpdate)="tweetContainer.updateTweets($event)"></app-post-tweet-box>
   <app-tweets-container #tweetContainer ></app-tweets-container>

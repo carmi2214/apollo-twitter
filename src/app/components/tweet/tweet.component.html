@@ -1,7 +1,7 @@
 <div class="tweet">
   <time><a href="#" [title]="tweet.date">{{timeSince(tweet.date)}}</a></time>
-  <a href="user/{{this.tweet.user.username}}" class="user">{{getFullName()}}
-    <small><a href="user/{{this.tweet.user.username}}">@{{this.tweet.user.username}}</a></small>
+  <a (click)="navigateToUserPage(this.tweet.user.username)" class="user">{{getFullName()}}
+    <small><a>@{{this.tweet.user.username}}</a></small>
   </a>
   <p [innerHTML]="this.tweet.body | linkify : {formatHref:this.formatHref}">
   </p>

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tweet} from '../../services/graphql/tweets.gql';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tweet',
@@ -11,7 +12,7 @@ export class TweetComponent implements OnInit {
   @Input()
   tweet: Tweet;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -29,6 +30,10 @@ export class TweetComponent implements OnInit {
     }
 
     return value;
+  }
+
+  navigateToUserPage(username: string){
+    this.router.navigate(['user', username]);
   }
 
   timeSince(date): string {

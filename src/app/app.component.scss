@@ -1,3 +1,5 @@
+@import "../styles";
+
 .site-container {
   padding-top: 200px;
 }
@@ -13,5 +15,20 @@ img {
   }
   to {
     opacity: 100
+  }
+}
+
+nav{
+  position: fixed;
+  top:3em;
+  & a {
+
+    width: 10%;
+    padding: 10%;
+    border-radius:20px;
+    margin: auto 4px;
+    color: white;
+    background: $black;
+    text-decoration: none;
   }
 }

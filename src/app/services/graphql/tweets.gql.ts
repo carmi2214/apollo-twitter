@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Mutation, Query} from 'apollo-angular';
+import { Injectable } from '@angular/core';
+import { Mutation, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
-import {User} from './users.gql';
+import { User } from './users.gql';
 
 export interface Tweet {
   id: string;
@@ -13,6 +13,7 @@ export interface Tweet {
 export interface TweetsResponse {
   allTweets: Tweet[];
   tweet: Tweet;
+  createTweet: Tweet;
   tweetsByTagName: Tweet[];
 }
 

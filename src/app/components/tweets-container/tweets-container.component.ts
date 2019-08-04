@@ -31,7 +31,7 @@ export class TweetsContainerComponent implements OnInit {
   }
 
   updateTweets(event?) {
-    if (event === undefined || this.router.url !== '') {
+    if (event === undefined || (this.router.url !== '' && this.router.url !== '/')) {
       if (this.router.url !== '') {
         this.router.navigateByUrl('');
       }

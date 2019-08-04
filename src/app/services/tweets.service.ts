@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {AllTweetsGQL, PostTweetGQL, Tweet, TweetsByTagNameGQL} from './graphql/tweets.gql';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Context} from '../entities/context';
 import {HttpHeaders} from '@angular/common/http';
 import {UserByUsernameGQL} from './graphql/users.gql';
 
@@ -34,8 +33,6 @@ export class TweetsService {
   }
 
   postTweet(tweetBody: string, username: string): Observable<Tweet> {
-    const context: Context = new Context();
-    context.setHeader('username', username);
     return this.postTweetGQL.mutate(
       {tweetBody}
       , {
