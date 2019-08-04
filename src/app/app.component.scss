@@ -1,0 +1,33 @@
+@import "../styles";
+
+.site-container {
+  padding-top: 200px;
+}
+
+img {
+  position: fixed;
+  transform: translate(-50%, 0%);
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 100
+  }
+}
+
+nav{
+  position: fixed;
+  top:3em;
+  & a {
+
+    padding: 1em;
+    border-radius:20px;
+    margin: auto 4px;
+    color: white;
+    background: $black;
+    text-decoration: none;
+  }
+}

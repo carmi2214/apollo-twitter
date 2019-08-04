@@ -1,0 +1,13 @@
+<div class="tweet">
+  <time><a href="#" [title]="tweet.date">{{timeSince(tweet.date)}}</a></time>
+  <a (click)="navigateToUserPage(this.tweet.user.username)" class="user">{{getFullName()}}
+    <small><a>@{{this.tweet.user.username}}</a></small>
+  </a>
+  <p [innerHTML]="this.tweet.body | linkify : {formatHref:this.formatHref}">
+  </p>
+  <div class="interactions">
+    <a href="#" class="reply"><i class="icon-reply"></i>Reply</a>
+    <a href="#" class="retweet"><i class="icon-retweet"></i>Retweet</a>
+    <a href="#" class="favorite"><i class="icon-star-empty"></i>Favorite</a>
+  </div>
+</div>

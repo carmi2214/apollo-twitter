@@ -1,0 +1,9 @@
+<form class="container" [formGroup]="postTweetForm">
+  <textarea formControlName="tweetText" placeholder="Enter text..." maxlength="120" value=""></textarea>
+  <span>{{120 - postTweetForm.controls.tweetText.value.toString().length}}</span>
+  <select formControlName="usersControl" placeholder="User">
+    <option value="" disabled selected>Select user</option>
+    <option [value]="user.username" *ngFor="let user of users">{{user.username}}</option>
+  </select>
+  <button (click)="postTweet()">Post</button>
+</form>

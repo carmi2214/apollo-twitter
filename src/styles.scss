@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+$black: #444;
+$highlight: #70d6ee;
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: linear-gradient($highlight, #c8fffc) no-repeat fixed;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 1.5em;
+  line-height: 1.5;
+  text-align: center;
+}
