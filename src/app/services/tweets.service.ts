@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AllTweetsGQL, PostTweetGQL, Tweet, TweetsByTagNameGQL} from './graphql/tweets.gql';
+import {AllTweetsGQL, PostTweetGQL, Tweet, TweetsByTagNameGQL, TweetsResponse} from './graphql/tweets.gql';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {HttpHeaders} from '@angular/common/http';
 import {UserByUsernameGQL} from './graphql/users.gql';
+import {FetchResult} from 'apollo-link';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +27,13 @@ export class TweetsService {
     }).valueChanges.pipe(map(result => result.data.tweetsByTagName));
   }
 
-  getTweetsByUsername(username: string): Observable<Tweet[]>{
+  getTweetsByUsername(username: string): Observable<Tweet[]> {
     return this.userByUsername.watch({
       username
-    }).valueChanges.pipe(map ( result => result.data.userByUsername.tweets));
+    }).valueChanges.pipe(map(result => result.data.userByUsername.tweets));
   }
 
-  postTweet(tweetBody: string, username: string): Observable<Tweet> {
+  postTweet(tweetBody: string, username: string): Observable<FetchResult<TweetsResponse>> {
     return this.postTweetGQL.mutate(
       {tweetBody}
       , {
