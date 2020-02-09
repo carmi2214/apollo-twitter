@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UsersService} from '../../services/users.service';
+import {User} from '../../services/graphql/users.gql';
 import {Router} from '@angular/router';
-import {User} from '../../entities/types';
 
 @Component({
   selector: 'app-register',

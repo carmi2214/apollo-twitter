@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UsersService} from '../../services/users.service';
+import {User} from '../../services/graphql/users.gql';
 import {TweetsService} from '../../services/tweets.service';
-import {Tweet, User} from '../../entities/types';
+import {Tweet} from '../../services/graphql/tweets.gql';
 
 @Component({
   selector: 'app-post-tweet-box',

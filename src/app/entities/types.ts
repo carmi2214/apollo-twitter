@@ -1,16 +1,16 @@
-export interface Tweet {
-  id: string;
-  body: string;
-  date: Date;
-  user: User;
-}
-
-export interface User {
-  id: string;
-  username: string;
-  password?: string;
-  firstName: string;
-  lastName: string;
-  avatarUrl?: string;
-  tweets: Tweet[];
-}
+// interface Tweet {
+//   id: string;
+//   body: string;
+//   date: Date;
+//   author: User;
+// }
+//
+// interface User {
+//   id: string;
+//   username: string;
+//   password: string;
+//   firstName: string;
+//   lastName: string;
+//   name?: string;
+//   avatarUrl?: string;
+// }

@@ -1,14 +1,71 @@
-import {Injectable} from '@angular/core';
-import {Mutation, Query} from 'apollo-angular';
+import { Injectable } from '@angular/core';
+import { Mutation, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
-import {Tweet} from '../../entities/types';
+import { User } from './users.gql';
 
-// Todo Create here the interface for the possible results from the graphql
+export interface Tweet {
+  id: string;
+  body: string;
+  date: Date;
+  user: User;
+}
 
+export interface TweetsResponse {
+  allTweets: Tweet[];
+  tweet: Tweet;
+  createTweet: Tweet;
+  tweetsByTagName: Tweet[];
+}
 
-// Todo: Create here all the services of Tweets to be used in the tweets.service.ts
-// Todo: Don't forget to append to each service class the following attribute:
+@Injectable({
+  providedIn: 'root',
+})
+export class AllTweetsGQL extends Query<TweetsResponse> {
+  document = gql`{
+    allTweets{
+      date
+      body
+      user{
+        firstName
+        lastName
+        username
+      }
+    }
+  }`;
+}
 
-// @Injectable({
-//    providedIn: 'root',
-// })
+@Injectable({
+  providedIn: 'root',
+})
+export class PostTweetGQL extends Mutation<TweetsResponse> {
+  document = gql`
+    mutation($tweetBody: String!){
+      createTweet(body:$tweetBody){
+        body,
+        date
+        user{
+          username
+          firstName
+          lastName
+        }
+      }
+    }`;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TweetsByTagNameGQL extends Query<TweetsResponse> {
+  document = gql`
+    query ($tag: String!){
+      tweetsByTagName(tagName: $tag){
+        body
+        date
+        user{
+          username
+          firstName
+          lastName
+        }
+      }
+    }`;
+}

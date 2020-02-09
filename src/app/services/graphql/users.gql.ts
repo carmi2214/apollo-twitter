@@ -1,14 +1,79 @@
 import {Injectable} from '@angular/core';
 import {Mutation, Query} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {User} from '../../entities/types';
+import {Tweet} from './tweets.gql';
 
-// Todo Create here the interface for the possible results from the graphql
+export interface User {
+  id: string;
+  username: string;
+  password?: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl?: string;
+  tweets: Tweet[];
+}
 
+export interface UsersResponses {
+  allUsers: User[];
+  userByUsername: User;
+}
 
-// Todo: Create here all the services of Tweets to be used in the tweets.service.ts
-// Todo: Don't forget to append to each service class the following attribute:
+@Injectable({
+  providedIn: 'root',
+})
+export class UsersGql extends Query<UsersResponses> {
+  document = gql`{
+    allUsers{
+      id
+      username
+      firstName
+      lastName
+      avatarUrl
+    }
+  }`;
+}
 
-// @Injectable({
-//    providedIn: 'root',
-// })
+@Injectable({
+  providedIn: 'root',
+})
+export class UserByUsernameGQL extends Query<UsersResponses> {
+  document = gql`
+    query($username: String!){
+      userByUsername(username:$username){
+        tweets{
+          body
+          date
+          user{
+            username
+            firstName
+            lastName
+          }
+        }
+      }
+    }`;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class RegisterUserGQL extends Mutation {
+  document = gql`
+    mutation(
+      $username: String!
+      $password: String!
+      $firstName: String!
+      $lastName: String!
+    ) {
+      createUser(
+        username: $username
+        password: $password
+        firstName: $firstName
+        lastName: $lastName
+      ) {
+        id
+        username
+      }
+    }`;
+
+}
+

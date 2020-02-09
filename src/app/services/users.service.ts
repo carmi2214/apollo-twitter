@@ -1,24 +1,24 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {UsersGql, User, RegisterUserGQL} from './graphql/users.gql';
 import {map} from 'rxjs/operators';
-import {User} from '../entities/types';
+import {FetchResult} from 'apollo-link';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  // TODO ADD HERE ALL THE GQL SERVICES
-  constructor() {
+  constructor(private allUsersGQL: UsersGql, private registerUserGQL: RegisterUserGQL) {
   }
 
   getUsers(): Observable<User[]> {
-    // TODO
-    return new Observable<User[]>();
+    return this.allUsersGQL.watch().valueChanges.pipe(map(result => result.data.allUsers));
   }
 
-  registerUser(userToRegister: User): Observable<User> {
-    // TODO
-    return new Observable<User>();
+  registerUser(userToRegister: User): Observable<FetchResult<{}>> {
+    return this.registerUserGQL.mutate({
+      ...userToRegister
+    });
   }
 }
