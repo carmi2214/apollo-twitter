@@ -14,66 +14,15 @@ export interface User {
 }
 
 export interface UsersResponses {
-  allUsers: User[];
-  userByUsername: User;
+  // Todo: Here you will declare all the possible responses from the graphql service (query names and types)
+  // Delete the following placeholder:
+  placeholder: void;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
-export class UsersGql extends Query<UsersResponses> {
-  document = gql`{
-    allUsers{
-      id
-      username
-      firstName
-      lastName
-      avatarUrl
-    }
-  }`;
-}
 
-@Injectable({
-  providedIn: 'root',
-})
-export class UserByUsernameGQL extends Query<UsersResponses> {
-  document = gql`
-    query($username: String!){
-      userByUsername(username:$username){
-        tweets{
-          body
-          date
-          user{
-            username
-            firstName
-            lastName
-          }
-        }
-      }
-    }`;
-}
+// Todo: Implement all the needed gql services (as shown in the presentation)
 
-@Injectable({
-  providedIn: 'root',
-})
-export class RegisterUserGQL extends Mutation {
-  document = gql`
-    mutation(
-      $username: String!
-      $password: String!
-      $firstName: String!
-      $lastName: String!
-    ) {
-      createUser(
-        username: $username
-        password: $password
-        firstName: $firstName
-        lastName: $lastName
-      ) {
-        id
-        username
-      }
-    }`;
-
-}
-
+// Remember to include the following attribute above each(!) service you write in order to use them in the angular services
+// @Injectable({
+//   providedIn: 'root',
+// })

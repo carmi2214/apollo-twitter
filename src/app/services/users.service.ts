@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {UsersGql, User, RegisterUserGQL} from './graphql/users.gql';
-import {map} from 'rxjs/operators';
+import {User} from './graphql/users.gql';
 import {FetchResult} from 'apollo-link';
 
 @Injectable({
@@ -9,16 +8,17 @@ import {FetchResult} from 'apollo-link';
 })
 export class UsersService {
 
-  constructor(private allUsersGQL: UsersGql, private registerUserGQL: RegisterUserGQL) {
+  // Todo use here all the apollo services you declared in the gql files
+  constructor() {
   }
 
+  // Todo
   getUsers(): Observable<User[]> {
-    return this.allUsersGQL.watch().valueChanges.pipe(map(result => result.data.allUsers));
+    return new Observable<User[]>();
   }
 
+  // Todo
   registerUser(userToRegister: User): Observable<FetchResult<{}>> {
-    return this.registerUserGQL.mutate({
-      ...userToRegister
-    });
+    return new Observable<FetchResult<{}>>();
   }
 }

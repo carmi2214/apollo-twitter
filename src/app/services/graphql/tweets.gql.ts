@@ -11,61 +11,15 @@ export interface Tweet {
 }
 
 export interface TweetsResponse {
-  allTweets: Tweet[];
-  tweet: Tweet;
-  createTweet: Tweet;
-  tweetsByTagName: Tweet[];
+  // Todo: Here you will declare all the possible responses from the graphql service (query names and types)
+  // Delete the following placeholder:
+  placeholder: void;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AllTweetsGQL extends Query<TweetsResponse> {
-  document = gql`{
-    allTweets{
-      date
-      body
-      user{
-        firstName
-        lastName
-        username
-      }
-    }
-  }`;
-}
 
-@Injectable({
-  providedIn: 'root',
-})
-export class PostTweetGQL extends Mutation<TweetsResponse> {
-  document = gql`
-    mutation($tweetBody: String!){
-      createTweet(body:$tweetBody){
-        body,
-        date
-        user{
-          username
-          firstName
-          lastName
-        }
-      }
-    }`;
-}
+// Todo: Implement all the needed gql services (as shown in the presentation)
 
-@Injectable({
-  providedIn: 'root',
-})
-export class TweetsByTagNameGQL extends Query<TweetsResponse> {
-  document = gql`
-    query ($tag: String!){
-      tweetsByTagName(tagName: $tag){
-        body
-        date
-        user{
-          username
-          firstName
-          lastName
-        }
-      }
-    }`;
-}
+// Remember to include the following attribute above each(!) service you write in order to use them in the angular services
+// @Injectable({
+//   providedIn: 'root',
+// })
