@@ -1,35 +1,34 @@
 import {Injectable} from '@angular/core';
-import {map} from 'rxjs/operators';
+import {Tweet, TweetsResponse} from './graphql/tweets.gql';
 import {Observable} from 'rxjs';
-import {HttpHeaders} from '@angular/common/http';
-import {Tweet} from '../entities/types';
+import {FetchResult} from 'apollo-link';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TweetsService {
 
-  // TODO ADD ALL THE GQL SERVICES HERE
+  // Todo: Use here all the services you declared in the gql files
   constructor() {
   }
 
+  // Todo
   getTweets(): Observable<Tweet[]> {
-    // TODO
     return new Observable<Tweet[]>();
   }
 
+  // Todo
   getTweetsByTagName(tagName: string): Observable<Tweet[]> {
-    // TODO
     return new Observable<Tweet[]>();
   }
 
+  // Todo
   getTweetsByUsername(username: string): Observable<Tweet[]> {
-    // TODO
     return new Observable<Tweet[]>();
   }
 
-  postTweet(tweetBody: string, username: string): Observable<Tweet> {
-    // TODO
-    return new Observable<Tweet>();
+  // Todo
+  postTweet(tweetBody: string, username: string): Observable<FetchResult<TweetsResponse>> {
+    return new Observable<FetchResult<TweetsResponse>>();
   }
 }

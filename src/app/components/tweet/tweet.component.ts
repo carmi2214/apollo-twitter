@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Tweet} from '../../services/graphql/tweets.gql';
 import {Router} from '@angular/router';
-import {Tweet} from '../../entities/types';
 
 @Component({
   selector: 'app-tweet',

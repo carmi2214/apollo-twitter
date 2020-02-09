@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TweetsService} from '../../services/tweets.service';
+import {Tweet} from '../../services/graphql/tweets.gql';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Tweet} from '../../entities/types';
 
 @Component({
   selector: 'app-tweets-container',

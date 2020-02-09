@@ -1,14 +1,28 @@
 import {Injectable} from '@angular/core';
 import {Mutation, Query} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {User} from '../../entities/types';
+import {Tweet} from './tweets.gql';
 
-// Todo Create here the interface for the possible results from the graphql
+export interface User {
+  id: string;
+  username: string;
+  password?: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl?: string;
+  tweets: Tweet[];
+}
+
+export interface UsersResponses {
+  // Todo: Here you will declare all the possible responses from the graphql service (query names and types)
+  // Delete the following placeholder:
+  placeholder: void;
+}
 
 
-// Todo: Create here all the services of Tweets to be used in the tweets.service.ts
-// Todo: Don't forget to append to each service class the following attribute:
+// Todo: Implement all the needed gql services (as shown in the presentation)
 
+// Remember to include the following attribute above each(!) service you write in order to use them in the angular services
 // @Injectable({
-//    providedIn: 'root',
+//   providedIn: 'root',
 // })
