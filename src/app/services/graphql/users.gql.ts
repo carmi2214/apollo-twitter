@@ -2,21 +2,26 @@ import {Injectable} from '@angular/core';
 import {Mutation, Query} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {Tweet} from './tweets.gql';
+import {Gender} from '../../../enum/gender';
+import {Observable} from 'rxjs';
+import {FetchResult} from 'apollo-link';
 
 export interface User {
   id: string;
-  username: string;
+  userName: string;
   password?: string;
   firstName: string;
   lastName: string;
-  avatarUrl?: string;
   tweets: Tweet[];
+  gender: Gender;
+  birthDate: Date;
 }
 
 export interface UsersResponses {
   // Todo: Here you will declare all the possible responses from the graphql service (query names and types)
   // Delete the following placeholder:
-  placeholder: void;
+  getUsers: Observable<User[]>;
+  registerUser: Observable<FetchResult<{}>>;
 }
 
 
