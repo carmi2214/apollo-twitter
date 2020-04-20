@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Tweet, TweetsResponse} from './graphql/tweets.gql';
+import {Tweet, TweetsMutationGql, TweetsQueryGql, TweetsResponse} from './graphql/tweets.gql';
 import {Observable} from 'rxjs';
 import {FetchResult} from 'apollo-link';
+import {pluck} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,26 +10,31 @@ import {FetchResult} from 'apollo-link';
 export class TweetsService {
 
   // Todo: Use here all the services you declared in the gql files
-  constructor() {
+  constructor(private tweetsQueryGql: TweetsQueryGql, private tweetsMutationGql: TweetsMutationGql) {
   }
 
   // Todo
   getTweets(): Observable<Tweet[]> {
-    return new Observable<Tweet[]>();
+    this.tweetsQueryGql.getAllTweets();
+    return this.tweetsQueryGql.watch().valueChanges.pipe(
+      pluck('data', 'allTweets')
+    );
   }
 
   // Todo
-  getTweetsByTagName(tagName: string): Observable<Tweet[]> {
-    return new Observable<Tweet[]>();
+  getTweetsByTagName(tagNameToSearch: string): Observable<Tweet[]> {
+    this.tweetsQueryGql.getTweetsByTag();
+    return this.tweetsQueryGql.watch({tagName: tagNameToSearch}).valueChanges.pipe(pluck('data', 'tweetsByTagName'));
   }
 
   // Todo
-  getTweetsByUsername(username: string): Observable<Tweet[]> {
-    return new Observable<Tweet[]>();
+  getTweetsByUsername(userName: string): Observable<Tweet[]> {
+    this.tweetsQueryGql.getTweetsByUsername();
+    return this.tweetsQueryGql.watch({username: userName}).valueChanges.pipe(pluck('data', 'tweetsByUsername'));
   }
 
   // Todo
-  postTweet(tweetBody: string, username: string): Observable<FetchResult<TweetsResponse>> {
-    return new Observable<FetchResult<TweetsResponse>>();
+  postTweet(tweetBody: string, userName: string): Observable<FetchResult<TweetsResponse>> {
+    return this.tweetsMutationGql.mutate({body: tweetBody}, {context: {headers: {username : userName}}});
   }
 }
